@@ -2,7 +2,6 @@ var mongoose = require("mongoose");
 var uniqueValidator = require("mongoose-unique-validator");
 var slug = require("slug");
 var User = mongoose.model("User");
-var placeholder = "/placeholder.png";
 
 var ItemSchema = new mongoose.Schema(
   {
@@ -50,13 +49,13 @@ ItemSchema.methods.toJSONFor = function (user) {
     slug: this.slug,
     title: this.title,
     description: this.description,
-    image: this.image || placeholder,
+    image: this.image,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     tagList: this.tagList,
     favorited: user ? user.isFavorite(this._id) : false,
     favoritesCount: this.favoritesCount,
-    seller: this.seller.toProfileJSONFor(user)
+    seller: this.seller.toProfileJSONFor(user),
   };
 };
 
