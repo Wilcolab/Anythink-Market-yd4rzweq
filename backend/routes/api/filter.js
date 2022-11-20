@@ -3,14 +3,12 @@ var mongoose = require("mongoose");
 var Item = mongoose.model("Item");
 
 // return a list of titles
-router.get("/:title", function (req, res, next) {
+router.get("/:title", function (req, res) {
   const title = req.params.title;
-
-  Item.filter((Item) => Item.title == title)
-    .then(function (titles) {
-      return res.json({ titles: titles });
-    })
-    .catch(next);
+  const result = Item.filter((item) => item.title == title);
+  res.status(200).json({
+    items: result,
+  });
 });
 
 module.exports = router;
