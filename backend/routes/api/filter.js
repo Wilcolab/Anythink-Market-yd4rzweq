@@ -5,9 +5,9 @@ var Item = mongoose.model("Item");
 // return a list of tags
 router.get("/", function (req, res, next) {
   Item.find()
-    .distinct("filter")
-    .then(function (filters) {
-      return res.json({ filters: filters });
+    .distinct("title")
+    .then(function (titles) {
+      return res.json({ titles: titles });
     })
     .catch(next);
 });
