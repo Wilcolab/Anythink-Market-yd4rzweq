@@ -2,13 +2,14 @@ var router = require("express").Router();
 var mongoose = require("mongoose");
 var Item = mongoose.model("Item");
 
-// return a list of titles
-router.get("/", function (req, res) {
-  const result = Item.filter((item) => item.title.includes(title) == true);
-
-  res.status(200).json({
-    result,
-  });
+// return a list of tags
+router.get("/", function (req, res, next) {
+  Item.find()
+    .distinct("filter")
+    .then(function (filters) {
+      return res.json({ filters: filters });
+    })
+    .catch(next);
 });
 
 module.exports = router;
