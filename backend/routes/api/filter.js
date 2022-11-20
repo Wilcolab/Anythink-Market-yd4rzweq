@@ -4,10 +4,9 @@ var Item = mongoose.model("Item");
 
 // return a list of tags
 router.get("/", function (req, res, next) {
-  Item.find()
-    .distinct("title")
-    .then(function (titles) {
-      return res.json({ titles: titles });
+  Item.filter((item) => item.title == title)
+    .then(function (items) {
+      return res.json({ items: items });
     })
     .catch(next);
 });
