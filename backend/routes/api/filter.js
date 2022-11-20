@@ -6,7 +6,7 @@ var Item = mongoose.model("Item");
 router.get("/:title", function (req, res, next) {
   const title = req.params.title;
 
-  Item.filter((item) => item.title == title)
+  Item.filter((item) => item.title === title)
     .then(function (titles) {
       return res.json({ titles: titles });
     })
